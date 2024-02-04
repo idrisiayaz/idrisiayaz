@@ -1,0 +1,80 @@
+@import "../../styles/contants.scss";
+
+.wrapper {
+  background: white;
+  overflow: hidden;
+  .container {
+    flex-direction: column;
+    gap: 2rem;
+    .heading {
+      width: 100%;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      > :nth-child(2) {
+        text-decoration: underline;
+        color: orange;
+        cursor: pointer;
+      }
+    }
+
+    .showCase {
+      width: 100%;
+      gap: 2.5rem;
+      justify-content: space-between;
+      flex-wrap: wrap;
+
+      @media (max-width: $sm) {
+        margin-bottom: 25px;
+      }
+
+      .card {
+        @media (max-width: $sm) {
+          width: 100%;
+        }
+        width: 350px;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 25rem;
+        max-height: 18rem;
+        box-shadow: 0px 21px 13px rgba(0, 0, 0, 13%);
+
+        a {
+          color: $primary;
+          text-decoration: none;
+        }
+      }
+
+      .cardImage {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+        cursor: pointer;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+
+      .cardContent {
+        padding: 20px;
+      }
+
+      .cardTitle {
+        font-size: 20px;
+        margin-bottom: 5px;
+        padding: 10px 10px 0px 10px;
+      }
+
+      .cardDescription {
+        font-size: 10px;
+        color: #555;
+        padding: 0px 15px 15px 10px;
+        font-family: "Lato", sans-serif; /* or 'Montserrat', 'Poppins', etc. */
+        font-weight: 200; /* Light variant */
+      }
+    }
+  }
+}
