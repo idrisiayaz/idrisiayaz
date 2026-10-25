@@ -223,8 +223,8 @@ const Hero = () => {
       </motion.div>
 
       {/* Scroll cue */}
-      <a href="#about" className={css.scrollIndicator}>
-        <span>SCROLL</span>
+      <a href="#contact" className={css.scrollIndicator}>
+        <span>SCROLL BOTTOM</span>
         <FaArrowDown />
       </a>
 

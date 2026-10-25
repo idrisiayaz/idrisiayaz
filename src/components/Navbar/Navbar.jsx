@@ -6,14 +6,14 @@ import { BiMenuAltRight } from "react-icons/bi";
 import { MdOutlineClose } from "react-icons/md";
 
 const leftLinks = [
-  { label: "ABOUT", href: "#about" },
+  { label: "ABOUT", href: "#home" },
   { label: "WORK", href: "#work" },
-  { label: "PROJECTS", href: "#projects" },
+  { label: "CONTRIBUTIONS", href: "#projects" },
 ];
 
 const rightLinks = [
-  { label: "SKILLS", href: "#skills" },
-  { label: "SERVICES", href: "#services" },
+  { label: "SKILLS", href: "#about" },
+  { label: "SERVICES", href: "#work" },
   { label: "CONTACT", href: "#contact" },
 ];
 

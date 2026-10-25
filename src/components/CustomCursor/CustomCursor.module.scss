@@ -4,11 +4,12 @@
   left: -4px;
   width: 8px;
   height: 8px;
-  background: #111;
+  background: #111111;
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
   will-change: transform;
+  transition: background-color 0.2s ease;
 }
 
 .ring {
@@ -17,19 +18,56 @@
   left: -18px;
   width: 36px;
   height: 36px;
-  border: 1.5px solid #111;
+  border: 1.5px solid #111111;
   border-radius: 50%;
   pointer-events: none;
   z-index: 9998;
   will-change: transform;
-  transition: width 0.2s, height 0.2s, top 0.2s, left 0.2s, border-color 0.2s;
+  transition:
+    width 0.2s,
+    height 0.2s,
+    top 0.2s,
+    left 0.2s,
+    border-color 0.2s,
+    background-color 0.2s;
 
   &.hovered {
     top: -28px;
     left: -28px;
     width: 56px;
     height: 56px;
-    border-color: #2563eb;
-    background: rgba(37, 99, 235, 0.06);
+    border-color: #111111;
+    background: rgba(0, 0, 0, 0.05);
   }
+}
+
+/* White center dot on dark backgrounds */
+.dot.darkSurface {
+  background-color: #ffffff;
+}
+
+/* White outer ring on dark backgrounds */
+.ring.darkSurface {
+  border-color: #ffffff;
+  background: transparent;
+}
+
+/* White expanded ring while hovering over interactive elements */
+.ring.darkSurface.hovered {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Preserve the original dark cursor on light backgrounds */
+.dot:not(.darkSurface) {
+  background-color: #111111;
+}
+
+.ring:not(.darkSurface) {
+  border-color: #111111;
+}
+
+.ring:not(.darkSurface).hovered {
+  border-color: #2563eb;
+  background: rgba(37, 99, 235, 0.06);
 }

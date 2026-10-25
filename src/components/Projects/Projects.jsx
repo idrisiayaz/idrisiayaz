@@ -1,166 +1,174 @@
-import React, { useRef } from 'react';
-import { motion } from 'framer-motion';
-import css from './Projects.module.scss';
-import { FaGithub, FaArrowUpRightFromSquare } from 'react-icons/fa6';
-import DashboardImg from '../../assets/Dashboardv2.png';
-import OpenDC16Img from '../../assets/OpenDC16.png';
-import MyNotebookImg from '../../assets/MyNotebook.png';
+import { motion } from "framer-motion";
+import css from "./Projects.module.scss";
+import { FaGithub, FaArrowUpRightFromSquare } from "react-icons/fa6";
+
+import yorderIcon from "../../assets/yorder-icon.jpg";
+import OpenDC16Img from "../../assets/OpenDC16.png";
+import LaavaIcon from "../../assets/laava-icon.png";
 
 const projects = [
   {
-    title: 'NFT Marketplace — OpenDC16',
+    number: "01",
+    title: "Yorder",
+    subtitle: "Quick Commerce App",
     description:
-      'A decentralized NFT marketplace on the ICP blockchain network. Supports secure, efficient NFT transactions with a seamless experience for buyers and sellers.',
+      "A quick-commerce application designed to simplify online ordering, enabling users to discover products, place orders, and enjoy a seamless shopping experience.",
+    image: yorderIcon,
+    tags: ["Product Development", "Multi-vendor", "Quick commerce"],
+    github: "",
+    live: "https://play.google.com/store/apps/details?id=com.yorder.app&pcampaignid=web_share",
+  },
+  {
+    number: "02",
+    title: "Laava: Stocks, F&O, Research",
+    subtitle: "Stock Market & Research App",
+    description:
+      "A stock market application that brings together market insights, F&O updates, investment research, and stock analysis to help users make more informed trading and investment decisions.",
+    image: LaavaIcon,
+    tags: ["Stock Market", "F&O", "Market Research", "Analytics"],
+    github: "",
+    live: "https://play.google.com/store/apps/details?id=com.laava.app",
+  },
+  {
+    number: "03",
+    title: "OpenDC16",
+    subtitle: "NFT Marketplace",
+    description:
+      "A decentralized NFT marketplace built on ICP, bringing blockchain technology and NFT transactions into a React web application.",
     image: OpenDC16Img,
-    tags: [
-      { name: 'Blockchain', color: '#8b5cf6' },
-      { name: 'ICP', color: '#F97316' },
-      { name: 'React', color: '#61DAFB' },
-      { name: 'Web3', color: '#84cc16' },
-    ],
-    github: 'https://github.com/idrisiayaz/NFT-Marketplace-openDC16',
-    live: '',
-  },
-  {
-    title: 'Payout v2 Dashboard',
-    description:
-      'A comprehensive analytics dashboard built with React and Material UI. Delivers intuitive data visualization for informed decision-making and enhanced UX.',
-    image: DashboardImg,
-    tags: [
-      { name: 'React', color: '#61DAFB' },
-      { name: 'Material UI', color: '#0081CB' },
-      { name: 'Data Viz', color: '#F97316' },
-    ],
-    github: '',
-    live: 'https://idrisiayaz.github.io/Payout-v2-Dashboard-Assignment/',
-  },
-  {
-    title: 'My Notebook App',
-    description:
-      'A full-featured note-taking app on the MERN stack. Users can create, organize, and store notes securely in the cloud with authentication.',
-    image: MyNotebookImg,
-    tags: [
-      { name: 'MongoDB', color: '#47A248' },
-      { name: 'Express', color: '#999' },
-      { name: 'React', color: '#61DAFB' },
-      { name: 'Node.js', color: '#84cc16' },
-    ],
-    github: '',
-    live: 'https://mynotebookapp-12vf.onrender.com/',
+    tags: ["React", "ICP", "Web3"],
+    github: "https://github.com/idrisiayaz/NFT-Marketplace-openDC16",
+    live: "",
   },
 ];
 
-const cardVariant = {
-  hidden: { opacity: 0, y: 50 },
-  show: (i) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.13, duration: 0.7, ease: [0.22, 1, 0.36, 1] },
-  }),
-};
-
 const ProjectCard = ({ project, index }) => {
-  const cardRef = useRef(null);
-
-  const handleMouseMove = (e) => {
-    const card = cardRef.current;
-    if (!card) return;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const cx = rect.width / 2;
-    const cy = rect.height / 2;
-    const rotX = ((y - cy) / cy) * -5;
-    const rotY = ((x - cx) / cx) * 5;
-    card.style.transform = `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-6px)`;
-  };
-
-  const handleMouseLeave = () => {
-    if (cardRef.current) cardRef.current.style.transform = '';
-  };
+  const destination = project.live || project.github;
 
   return (
-    <motion.div
-      ref={cardRef}
+    <motion.article
       className={css.card}
-      variants={cardVariant}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.2 }}
-      custom={index}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.12 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      <div className={css.imgWrapper}>
-        <img src={project.image} alt={project.title} className={css.img} />
-        <div className={css.imgOverlay}>
-          <span>View Details</span>
-        </div>
-      </div>
-      <div className={css.cardBody}>
-        <h3 className={css.cardTitle}>{project.title}</h3>
-        <p className={`secondaryText ${css.cardDesc}`}>{project.description}</p>
+      <img
+        src={project.image}
+        alt={`${project.title} project preview`}
+        className={css.cardImage}
+        loading="lazy"
+      />
+
+      <div className={css.imageShade} />
+
+      <div className={css.cardTop}>
+        <span className={css.number}>{project.number}</span>
+
         <div className={css.tags}>
           {project.tags.map((tag) => (
-            <span
-              key={tag.name}
-              className={css.tag}
-              style={{ '--tag-color': tag.color }}
-            >
-              {tag.name}
-            </span>
+            <span key={tag}>{tag}</span>
           ))}
         </div>
-        <div className={css.links}>
+      </div>
+
+      <div className={css.cardContent}>
+        <div className={css.projectType}>{project.subtitle}</div>
+        <h3>{project.title}</h3>
+        <p>{project.description}</p>
+      </div>
+
+      {destination ? (
+        <a
+          href={destination}
+          target="_blank"
+          rel="noreferrer"
+          className={css.cardArrow}
+          aria-label={`Open ${project.title}`}
+        >
+          <FaArrowUpRightFromSquare />
+        </a>
+      ) : (
+        <span className={css.cardArrow} aria-hidden="true">
+          <FaArrowUpRightFromSquare />
+        </span>
+      )}
+
+      <div className={css.cardBottom}>
+        <span>PROJECT / {project.number}</span>
+        <div className={css.cardLinks}>
           {project.github && (
-            <a href={project.github} target="_blank" rel="noreferrer" className={css.link} data-cursor>
-              <FaGithub size={15} /> GitHub
+            <a href={project.github} target="_blank" rel="noreferrer">
+              <FaGithub /> GitHub
             </a>
           )}
           {project.live && (
-            <a href={project.live} target="_blank" rel="noreferrer" className={css.link} data-cursor>
-              <FaArrowUpRightFromSquare size={13} /> Live Demo
+            <a href={project.live} target="_blank" rel="noreferrer">
+              Live demo <FaArrowUpRightFromSquare />
             </a>
           )}
         </div>
       </div>
-    </motion.div>
+    </motion.article>
   );
 };
 
 const Projects = () => (
   <section className={css.wrapper} id="projects">
-    <a className="anchor" id="projects"></a>
-    <div className={`innerWidth paddings ${css.container}`}>
-      <div className={css.header}>
-        <div className="sectionLabel">Portfolio</div>
-        <div className={css.headerRight}>
-          <motion.h2
-            className={css.title}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7 }}
-          >
-            Selected Works
-          </motion.h2>
-          <a
-            href="https://github.com/idrisiayaz"
-            target="_blank"
-            rel="noreferrer"
-            className="btn-outline"
-            data-cursor
-          >
-            All Projects
-          </a>
-        </div>
-      </div>
+    <div className={css.container}>
+      <header className={css.header}>
+        <div className={css.sectionLabel}>SELECTED WORK</div>
 
-      <div className={css.grid}>
-        {projects.map((p, i) => (
-          <ProjectCard key={p.title} project={p} index={i} />
+        <div className={css.headingRow}>
+          <h2>
+            Work &amp;
+            <br />
+            <span>Contributions.</span>
+          </h2>
+
+          <div className={css.headingDescription}>
+            <p>
+              A selection of my work and contributions across web applications,
+              full-stack development, and digital products. Each project
+              reflects a different challenge, approach, and part of my
+              development journey.
+            </p>
+
+            <a
+              href="https://github.com/idrisiayaz"
+              target="_blank"
+              rel="noreferrer"
+              className={css.githubLink}
+            >
+              <FaGithub />
+              Explore all projects
+              <FaArrowUpRightFromSquare />
+            </a>
+          </div>
+        </div>
+
+        <div className={css.sectionMeta}>
+          <span>PERSONAL PROJECTS &amp; DEVELOPMENT WORK</span>
+          <span>01 — 03 / SELECTED</span>
+        </div>
+      </header>
+
+      <div className={css.projectGrid}>
+        {projects.map((project, index) => (
+          <ProjectCard key={project.number} project={project} index={index} />
         ))}
       </div>
+
+      <footer className={css.footer}>
+        <span>MORE WORK. MORE THINGS TO BUILD.</span>
+        <a
+          href="https://github.com/idrisiayaz"
+          target="_blank"
+          rel="noreferrer"
+        >
+          VIEW GITHUB <FaArrowUpRightFromSquare />
+        </a>
+      </footer>
     </div>
   </section>
 );
