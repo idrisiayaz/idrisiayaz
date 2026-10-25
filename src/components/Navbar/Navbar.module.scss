@@ -1,116 +1,269 @@
-@import '../../styles/contants.scss';
 
 .navbar {
+  --nav-ink: #111111;
+  --nav-bg: rgba(232, 232, 232, 0.9);
+  --nav-border: rgba(0, 0, 0, 0.12);
+
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 1.4rem 0;
-  transition: background 0.3s ease, backdrop-filter 0.3s ease, border-bottom 0.3s ease, padding 0.3s ease;
 
-  &.scrolled {
-    background: rgba(249, 248, 245, 0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid $border;
-    padding: 0.9rem 0;
-  }
+  padding: 1.15rem 0;
+  color: var(--nav-ink);
+
+  background: transparent;
+  border-bottom: 1px solid transparent;
+
+  transition:
+    background 0.3s ease,
+    backdrop-filter 0.3s ease,
+    border-color 0.3s ease,
+    padding 0.3s ease;
 }
 
+.scrolled {
+  padding: 0.8rem 0;
+  background: var(--nav-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom-color: var(--nav-border);
+}
+
+/* Three-column grid guarantees exact logo centering. */
 .inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 6rem;
+  position: relative;
 
-  @media (max-width: $lg) { padding: 0 3rem; }
-  @media (max-width: $sm) { padding: 0 1.5rem; }
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 4vw, 4rem);
 }
 
-.logo {
+.leftLinks,
+.rightLinks {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
-  text-decoration: none;
-  color: $text;
+  gap: clamp(1rem, 2.3vw, 2.5rem);
 
-  img {
-    width: 32px;
-    height: 32px;
-    object-fit: contain;
-    filter: invert(1);
-  }
-
-  span {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 1.05rem;
-    letter-spacing: -0.02em;
-  }
-}
-
-.links {
-  display: flex;
-  align-items: center;
-  gap: 2.5rem;
+  padding: 0;
+  margin: 0;
   list-style: none;
 
-  @media (max-width: $md) { display: none; }
+  li {
+    list-style: none;
+  }
 
-  li a {
-    color: $text;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
+  a {
     position: relative;
-    transition: opacity 0.2s;
+    display: inline-block;
+
+    color: var(--nav-ink);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(0.65rem, 0.85vw, 0.78rem);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    white-space: nowrap;
+
+    transition: opacity 0.2s ease;
 
     &::after {
       content: '';
       position: absolute;
-      bottom: -3px;
       left: 0;
+      bottom: -6px;
+
       width: 0;
-      height: 1.5px;
-      background: $text;
-      transition: width 0.22s ease;
+      height: 1px;
+      background: currentColor;
+
+      transition: width 0.25s ease;
     }
 
     &:hover {
-      opacity: 0.7;
-      &::after { width: 100%; }
+      opacity: 0.65;
+
+      &::after {
+        width: 100%;
+      }
     }
   }
 }
 
-.ctaBtn {
-  padding: 0.6rem 1.3rem !important;
-  font-size: 0.85rem !important;
-  border-radius: 6px !important;
+.leftLinks {
+  justify-content: flex-start;
 }
 
+.rightLinks {
+  justify-content: flex-end;
+}
+
+/* Centered brand */
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+
+  color: #000000;
+  text-decoration: none;
+  white-space: nowrap;
+
+  img {
+    display: block;
+    width: 31px;
+    height: 31px;
+    object-fit: contain;
+
+    /* Convert the logo to black */
+    filter: brightness(0) saturate(100%);
+  }
+}
+
+/* Mobile menu button */
 .hamburger {
   display: none;
-  cursor: pointer;
-  color: $text;
+  align-items: center;
+  justify-content: center;
 
-  @media (max-width: $md) { display: flex; }
+  width: 42px;
+  height: 42px;
+  padding: 0;
+
+  color: var(--nav-ink);
+  background: transparent;
+  border: var(--nav-border);
+
+  cursor: pointer;
 }
 
+/* Mobile drawer */
 .drawer {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  padding: 1.5rem 1.5rem 2rem;
-  border-top: 1px solid $border;
-  background: $bg;
+  gap: 0;
 
-  a {
-    color: $text;
-    text-decoration: none;
-    font-size: 1.1rem;
-    font-weight: 600;
+  max-height: calc(100svh - 75px);
+  overflow-y: auto;
+  padding: 0.7rem 1.5rem 1.5rem;
+
+  background: #e8e8e8;
+  border-top: 1px solid var(--nav-border);
+
+  > a:not(.mobileCta) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 1rem 0;
+    color: var(--nav-ink);
+    border-bottom: 1px solid var(--nav-border);
+
     font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+  }
+}
+
+.drawerArrow {
+  font-size: 1rem;
+}
+
+.mobileCta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 1.1rem;
+  padding: 1rem 1.1rem;
+
+  color: #ffffff;
+  background: #111111;
+  border-radius: 8px;
+
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* Tablet and mobile */
+@media (max-width: 900px) {
+  .inner {
+    padding-inline: 1.5rem;
+  }
+
+  .leftLinks,
+  .rightLinks {
+    gap: 1rem;
+  }
+
+  .leftLinks a,
+  .rightLinks a {
+    font-size: 0.65rem;
+  }
+
+  .logo {
+    gap: 0.4rem;
+
+    img {
+      width: 27px;
+      height: 27px;
+    }
+
+    span {
+      font-size: 0.78rem;
+    }
+  }
+}
+
+@media (max-width: 680px) {
+  .navbar {
+    padding: 0.8rem 0;
+  }
+
+  .scrolled {
+    padding: 0.65rem 0;
+  }
+
+  .inner {
+    grid-template-columns: 1fr auto;
+    padding-inline: 1rem;
+  }
+
+  .leftLinks,
+  .rightLinks {
+    display: none;
+  }
+
+  .logo {
+    grid-column: 1;
+    justify-self: start;
+  }
+
+  .hamburger {
+    display: flex;
+    grid-column: 2;
+    justify-self: end;
+  }
+
+  .drawer {
+    padding-inline: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar,
+  .leftLinks a,
+  .rightLinks a {
+    transition: none;
   }
 }

@@ -1,133 +1,250 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import css from './About.module.scss';
-import { education } from '../../utils/data.js';
+import React from "react";
+import { motion } from "framer-motion";
+import css from "./About.module.scss";
+
+import js from "../../assets/js.png";
+import nodeJS from "../../assets/nodeJS.png";
+import cpp from "../../assets/cpp.png";
+import TypeScriptLogo from "../../assets/typescript.png";
+import PythonLogo from "../../assets/python.png";
+import javaLogo from "../../assets/java-logo.png";
+import reactLogo from "../../assets/react.png";
+import html from "../../assets/html.png";
+import cssLogo from "../../assets/css.png";
+import mongodb from "../../assets/mongodb.png";
+import express from "../../assets/express.png";
+import git from "../../assets/git.png";
+import mysql from "../../assets/mysql.png";
+import aws from "../../assets/Aws.png";
+import github from "../../assets/github.png";
+import bootstrap from "../../assets/bootstrap.png";
+import scss from "../../assets/scss.png";
+import materialUI from "../../assets/MaterialUI.png";
 
 const skills = [
-  { name: 'React', color: '#61DAFB', bg: 'rgba(97,218,251,0.12)' },
-  { name: 'JavaScript', color: '#F7DF1E', bg: 'rgba(247,223,30,0.15)' },
-  { name: 'TypeScript', color: '#3178C6', bg: 'rgba(49,120,198,0.12)' },
-  { name: 'Node.js', color: '#84cc16', bg: 'rgba(132,204,22,0.12)' },
-  { name: 'Express.js', color: '#999', bg: 'rgba(153,153,153,0.1)' },
-  { name: 'MongoDB', color: '#47A248', bg: 'rgba(71,162,72,0.12)' },
-  { name: 'MySQL', color: '#4479A1', bg: 'rgba(68,121,161,0.12)' },
-  { name: 'HTML5', color: '#E34F26', bg: 'rgba(227,79,38,0.12)' },
-  { name: 'CSS3 / SCSS', color: '#CC6699', bg: 'rgba(204,102,153,0.12)' },
-  { name: 'Git & GitHub', color: '#F97316', bg: 'rgba(249,115,22,0.12)' },
-  { name: 'AWS', color: '#FF9900', bg: 'rgba(255,153,0,0.12)' },
-  { name: 'Next.js', color: '#111', bg: 'rgba(17,17,17,0.08)' },
-  { name: 'Bootstrap', color: '#7952B3', bg: 'rgba(121,82,179,0.12)' },
-  { name: 'Material UI', color: '#0081CB', bg: 'rgba(0,129,203,0.12)' },
-  { name: 'C++', color: '#00599C', bg: 'rgba(0,89,156,0.12)' },
+  { name: "React", image: reactLogo },
+  { name: "JavaScript", image: js },
+  { name: "TypeScript", image: TypeScriptLogo },
+  { name: "Java", image: javaLogo },
+  { name: "HTML5", image: html },
+  { name: "CSS3", image: cssLogo },
+  { name: "SCSS", image: scss },
+  { name: "Material UI", image: materialUI },
+  { name: "Bootstrap", image: bootstrap },
+  { name: "Node.js", image: nodeJS },
+  { name: "Express.js", image: express },
+  { name: "Python", image: PythonLogo },
+  { name: "MongoDB", image: mongodb },
+  { name: "MySQL", image: mysql },
+  { name: "AWS", image: aws },
+  { name: "Git", image: git },
+  { name: "GitHub", image: github },
+  { name: "C++", image: cpp },
+  { name: "And more...", image: null },
+];
+
+const services = [
+  {
+    number: "01",
+    title: "Web Application Development",
+    description:
+      "Responsive, user-friendly applications built around your product needs.",
+  },
+  {
+    number: "02",
+    title: "Backend & API Development",
+    description:
+      "APIs, database integrations, and backend systems designed to work reliably.",
+  },
+  {
+    number: "03",
+    title: "Custom Software & Automation",
+    description:
+      "Practical solutions that streamline workflows and solve everyday problems.",
+  },
 ];
 
 const container = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.08, delayChildren: 0.2 } },
-};
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22,1,0.36,1] } },
+  visible: {
+    transition: {
+      staggerChildren: 0.06,
+    },
+  },
 };
 
-const About = () => (
-  <section className={css.wrapper} id="about">
-    <a className="anchor" id="about"></a>
-    <div className={`innerWidth paddings ${css.container}`}>
-      {/* Header row */}
-      <div className={css.header}>
-        <div className="sectionLabel">About Me</div>
-        <motion.h2
-          initial={{ opacity: 0, y: 24 }}
+const skillItem = {
+  hidden: { opacity: 0, y: 10 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.3 },
+  },
+};
+
+const About = () => {
+  return (
+    <section className={css.wrapper} id="about">
+      <div className={css.container}>
+        <motion.header
+          className={css.header}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7 }}
-          className={css.title}
+          transition={{ duration: 0.45 }}
         >
-          The Developer<br />
-          <span className={css.titleOutline}>Behind the Code</span>
-        </motion.h2>
-      </div>
+          <span className={css.eyebrow}>ABOUT ME</span>
 
-      {/* Two columns */}
-      <div className={css.grid}>
-        {/* Left — bio + education */}
-        <div className={css.leftCol}>
-          <motion.p
-            className={`secondaryText ${css.bio}`}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.7 }}
-          >
-            I'm Muhammad Ayaz Idrisi — a fullstack developer from Mumbai.
-            I graduated in Computer Science (B.E) from M.H. Saboo Siddik College
-            of Engineering with a CGPA of 8.1. I love crafting seamless digital
-            products, from polished frontends to robust back-end APIs.
-          </motion.p>
+          <h2 className={css.title}>
+            Engineering solutions.
+            <br />
+            <span>Solving real problems.</span>
+          </h2>
 
-          <div className={css.eduLabel}>
-            <div className="sectionLabel">Education</div>
-          </div>
+          <p className={css.subtitle}>
+            I enjoy building useful digital products, from the first idea
+            through to the details that make them work well.
+          </p>
+        </motion.header>
 
-          <div className={css.educationList}>
-            {education.map((edu, i) => (
-              <motion.div
-                key={i}
-                className={css.eduCard}
-                initial={{ opacity: 0, x: -24 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ delay: i * 0.12, duration: 0.6 }}
-              >
-                <div
-                  className={css.eduIcon}
-                  style={{ background: edu.bg }}
-                >
-                  <edu.icon size={18} color="#fff" />
-                </div>
-                <div className={css.eduInfo}>
-                  <span className={css.eduName}>{edu.name}</span>
-                  <span className={css.eduCourse}>{edu.course}</span>
-                  <div className={css.eduMeta}>
-                    <span>{edu.duration}</span>
-                    <span className={css.grade}>{edu.grade}</span>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Right — skills */}
-        <div className={css.rightCol}>
-          <div className="sectionLabel">Skills &amp; Technologies</div>
+        <div className={css.grid}>
+          {/* Left: Introduction and services */}
           <motion.div
-            className={css.skillGrid}
-            variants={container}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
+            className={css.leftCol}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.45 }}
           >
-            {skills.map((sk) => (
-              <motion.span
-                key={sk.name}
-                className={css.skillPill}
-                variants={item}
-                style={{
-                  '--pill-color': sk.color,
-                  '--pill-bg': sk.bg,
-                }}
-                whileHover={{ scale: 1.06 }}
-              >
-                {sk.name}
-              </motion.span>
-            ))}
+            <div className={css.introTop}>
+              <span className={css.sectionLabel}>A LITTLE ABOUT ME</span>
+              <h3 className={css.introTitle}>
+                Building software with purpose.
+              </h3>
+            </div>
+
+            <div className={css.bioContent}>
+              <p className={css.bio}>
+                I'm Ayaz, a software engineer from Mumbai who enjoys turning
+                ideas into useful, well-built software. I work across frontend
+                and backend development, creating applications that are
+                practical, reliable, and easy to use.
+              </p>
+
+              <p className={css.bio}>
+                From building interfaces and APIs to working with databases and
+                connecting external services, I enjoy understanding how the
+                pieces fit together and finding straightforward solutions to
+                real problems.
+              </p>
+
+              <p className={css.bio}>
+                I'm always interested in working on meaningful products, helping
+                businesses improve their systems, and collaborating with people
+                who have an idea worth building.
+              </p>
+            </div>
+
+            <div className={css.services}>
+              <span className={css.sectionLabel}>HOW I CAN HELP</span>
+
+              <div className={css.serviceList}>
+                {services.map((service) => (
+                  <div className={css.serviceItem} key={service.number}>
+                    <span className={css.serviceNumber}>{service.number}</span>
+
+                    <div className={css.serviceContent}>
+                      <h4>{service.title}</h4>
+                      <p>{service.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right: Skills */}
+          <motion.div
+            className={css.rightCol}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.45, delay: 0.08 }}
+          >
+            <div className={css.skillsHeader}>
+              <div>
+                <span className={css.sectionLabel}>TOOLS & TECHNOLOGIES</span>
+                <h3 className={css.skillsTitle}>My tech stack</h3>
+              </div>
+
+              <span className={css.skillsCount}>
+                {String(skills.length).padStart(2, "0")} technologies
+              </span>
+            </div>
+
+            <motion.div
+              className={css.skillsGrid}
+              variants={container}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+            >
+              {skills.map((skill) => (
+                <motion.div
+                  className={css.skillItem}
+                  variants={skillItem}
+                  key={skill.name}
+                  title={skill.name}
+                >
+                  <div className={css.skillIcon}>
+                    {skill.image ? (
+                      <img src={skill.image} alt="" loading="lazy" />
+                    ) : (
+                      <span className={css.skillFallback}>
+                        {skill.name
+                          .split(/[\s.]+/)
+                          .filter(Boolean)
+                          .map((word) => word[0])
+                          .join("")
+                          .slice(0, 3)
+                          .toUpperCase()}
+                      </span>
+                    )}
+                  </div>
+
+                  <span className={css.skillName}>{skill.name}</span>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <p className={css.skillsNote}>
+              The right tools for the problem — with an emphasis on clean,
+              maintainable, and practical solutions.
+            </p>
           </motion.div>
         </div>
+
+        {/* Horizontal contact CTA */}
+        <motion.div
+          className={css.connectSection}
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.4 }}
+        >
+          <div className={css.connectText}>
+            <span className={css.sectionLabel}>HAVE A PROJECT IN MIND?</span>
+            <h3>Let's build something great.</h3>
+            <p>Have an idea, a project, or a problem to solve? Let's talk.</p>
+          </div>
+
+          <a className={css.contactButton} href="mailto:idrisiayaz@gmail.com">
+            Get in touch <span aria-hidden="true">↗</span>
+          </a>
+        </motion.div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default About;
