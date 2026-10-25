@@ -1,77 +1,147 @@
-@import "../../styles/contants.scss";
+@import '../../styles/contants.scss';
 
 .wrapper {
-  .container {
-    flex-direction: column;
-    gap: 2rem;
-    margin-bottom: 15px;
+  padding: 7rem 0;
+  background: $bg;
+  border-top: 1.5px solid $border;
+}
 
-    .experiences {
-      width: 100%;
-      flex-direction: column;
-      gap: 1.4rem;
-      position: relative;
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
-      .exp {
-        width: 100%;
-        justify-content: space-between;
-        line-height: 40px;
-        align-items: flex-start;
+.title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: $text;
+  margin-bottom: 3rem;
+}
 
-        > div {
-          flex: 1;
-        }
+/* ===== TIMELINE ===== */
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
 
-        .role {
-          margin-left: 2rem;
+.line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+  background: $border;
+  transform-origin: top center;
 
-          p {
-            @media (max-width: $sm) {
-              font-size: 12px;
-              line-height: 17px;
-              color: #afafaf;
-            }
-          }
-        }
-      }
+  @media (max-width: $md) {
+    left: 16px;
+  }
+}
 
-      .progressbar {
-        position: absolute;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 1.4rem;
-        left: 45%;
+/* ===== ROW ===== */
+.expRow {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  padding-right: calc(50% + 2.5rem);
 
-        .line {
-          position: absolute;
-          height: 92%;
-          width: 2px;
-          background-image: linear-gradient(
-            black 33%,
-            rgba(255, 255, 255, 0) 0%
-          );
-          background-position: right;
-          background-size: 2px 30px;
-          background-repeat: repeat-y;
-          left: 48%;
-          z-index: 1;
-          border-radius: 5px;
-        }
+  @media (max-width: $md) {
+    padding-right: 0;
+    padding-left: 3.5rem;
+  }
 
-        > div {
-          flex: 1;
-          padding-top: 0.8rem;
-          z-index: 2;
+  &.right {
+    justify-content: flex-end;
+    padding-right: 0;
+    padding-left: calc(50% + 2.5rem);
 
-          .circle {
-            border-radius: 50%;
-            background: black;
-            width: 1.2rem;
-            height: 1.2rem;
-          }
-        }
-      }
+    @media (max-width: $md) {
+      padding-left: 3.5rem;
+      justify-content: flex-start;
     }
   }
+}
+
+/* ===== DOT ===== */
+.dot {
+  position: absolute;
+  left: calc(50% - 7px);
+  top: 28px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2.5px solid $bg;
+  box-shadow: 0 0 0 2.5px currentColor;
+  z-index: 2;
+
+  @media (max-width: $md) {
+    left: 10px;
+  }
+}
+
+/* ===== CARD ===== */
+.card {
+  background: $white;
+  border: 1.5px solid $border;
+  border-radius: 12px;
+  padding: 1.6rem;
+  max-width: 440px;
+  width: 100%;
+  transition: border-color 0.22s, box-shadow 0.22s, transform 0.22s;
+
+  &:hover {
+    border-color: $text;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+    transform: translateY(-3px);
+  }
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.cardIcon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tenure {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: $text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.role {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: $text;
+  line-height: 1.2;
+  margin: 0.2rem 0 0.1rem;
+}
+
+.place {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: $text-muted;
+}
+
+.detail {
+  font-size: 0.88rem;
+  line-height: 1.7;
 }

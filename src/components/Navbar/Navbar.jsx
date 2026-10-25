@@ -1,104 +1,96 @@
-import React, { useEffect, useRef, useState } from "react";
-import css from "./Navbar.module.scss";
-import { BiMenuAltRight } from "react-icons/bi";
-import { MdOutlineClose } from "react-icons/md";
-import { motion } from "framer-motion";
-import { getMenuStyles, headerVariants } from "../../utils/motion";
-import useOutsideAlerter from "../../hooks/useOutsideAlerter";
-import useHeaderShadow from "../../hooks/useHeaderShadow";
-import myImg from "../../assets/logo.png";
-import { MdKeyboardArrowRight } from "react-icons/md";
+import React, { useEffect, useRef, useState } from 'react';
+import css from './Navbar.module.scss';
+import { motion } from 'framer-motion';
+import logo from '../../assets/logo.png';
+import { BiMenuAltRight } from 'react-icons/bi';
+import { MdOutlineClose } from 'react-icons/md';
 
-const Header = () => {
+const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
-  const [menuOpened, setMenuOpened] = useState(false);
-  const headerShadow = useHeaderShadow();
-  const [navbarBackground, setNavbarBackground] = useState("transparent");
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentPosition = window.scrollY;
-
-      // Set the background color of the navbar to black when scrolling
-      if (currentPosition > 0) {
-        setNavbarBackground("white");
-      } else {
-        setNavbarBackground("transparent");
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  //to handle click outside of sidebar on mobile
-  useOutsideAlerter({
-    menuRef,
-    setMenuOpened,
-  });
+  useEffect(() => {
+    const handleOutside = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleOutside);
+    return () => document.removeEventListener('mousedown', handleOutside);
+  }, []);
+
+  const links = ['About', 'Work', 'Projects'];
 
   return (
-    <motion.div
-      variants={headerVariants}
-      initial="hidden"
-      whileInView="show"
-      className={` paddings ${css.wrapper}`}
-      viewport={{ once: true, amount: 0.25 }}
-      style={{
-        boxShadow: headerShadow,
-        backgroundColor: navbarBackground,
-        transition: "background-color 0.3s ease-in-out",
-      }}
+    <motion.nav
+      className={`${css.navbar} ${scrolled ? css.scrolled : ''}`}
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div className={`innerWidth ${css.container} flexCenter`}>
-        <div className={css.name}>
-          <img src={myImg} />
-        </div>
-        <ul
-          className={`flexCenter ${css.menu}`}
-          ref={menuRef}
-          style={getMenuStyles(menuOpened)}
-        >
-          {["Education", "Work", "Projects"].map((item) => (
+      <div className={`innerWidth ${css.inner}`}>
+        {/* Logo */}
+        <a href="/" className={css.logo}>
+          <img src={logo} alt="AI" />
+          <span>Ayaz Idrisi</span>
+        </a>
+
+        {/* Desktop links */}
+        <ul className={css.links} ref={menuRef}>
+          {links.map((item) => (
             <li key={item}>
               <a
                 href={`#${item.toLowerCase()}`}
-                onClick={() => setMenuOpened((prev) => !prev)}
+                onClick={() => setMenuOpen(false)}
               >
                 {item}
               </a>
             </li>
           ))}
           <li>
-            <a href="mailto:idrisiayaz@gmail.com">
-              <motion.button>
-                Let’s Connect{" "}
-                <MdKeyboardArrowRight className="icon" size={25} />
-              </motion.button>
+            <a href="mailto:idrisiayaz@gmail.com" className={`${css.ctaBtn}`} data-cursor>
+              Let's Connect
             </a>
           </li>
         </ul>
 
-        {/* for medium and small screens */}
-        <div className={css.menuIcon}>
-          {!menuOpened ? (
-            <BiMenuAltRight
-              size={30}
-              onClick={() => setMenuOpened((prev) => !prev)}
-            />
-          ) : (
-            <MdOutlineClose
-              size={30}
-              onClick={() => setMenuOpened((prev) => !prev)}
-            />
-          )}
+        {/* Hamburger */}
+        <div className={css.hamburger} onClick={() => setMenuOpen(!menuOpen)}>
+          {menuOpen ? <MdOutlineClose size={26} /> : <BiMenuAltRight size={26} />}
         </div>
       </div>
-    </motion.div>
+
+      {/* Mobile drawer */}
+      {menuOpen && (
+        <motion.div
+          className={css.drawer}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0 }}
+        >
+          {links.map((item) => (
+            <a
+              key={item}
+              href={`#${item.toLowerCase()}`}
+              onClick={() => setMenuOpen(false)}
+            >
+              {item}
+            </a>
+          ))}
+          <a href="mailto:idrisiayaz@gmail.com" className="btn-primary">
+            Let's Connect
+          </a>
+        </motion.div>
+      )}
+    </motion.nav>
   );
 };
 
-export default Header;
+export default Navbar;

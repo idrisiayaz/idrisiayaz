@@ -1,90 +1,57 @@
 @import './contants.scss';
 
-.bg-primary {
-  background: white;
+/* ===== BASE ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.innerWidth {
-  @media (min-width: $xxl) {
-    max-width: 1280px;
-    margin: auto;
-  }
+html {
+  scroll-behavior: auto; /* Lenis handles this */
+}
 
+body {
+  background: $bg;
+  color: $text;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ===== SELECTION ===== */
+::selection {
+  background: $text;
+  color: $white;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: $bg; }
+::-webkit-scrollbar-thumb { background: $text; border-radius: 3px; }
+
+/* ===== TYPOGRAPHY ===== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+/* ===== LAYOUT ===== */
+.innerWidth {
   width: 100%;
+  @media (min-width: $xxl) {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
 }
 
 .paddings {
-  @media (min-width: $sm) {
-    padding: 4rem;
-  }
-
-
-  @media (min-width: $xl),
-  (min-width: $md) {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
-
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding: 0 6rem;
+  @media (max-width: $lg) { padding: 0 3rem; }
+  @media (max-width: $sm) { padding: 0 1.5rem; }
 }
-
-
-
-.xPaddings {
-  @media (min-width: $sm) {
-    padding-left: 4rem;
-    padding-right: 4rem;
-  }
-
-  padding-left: 1.5rem;
-  /* 24px */
-  padding-right: 1.5rem;
-  /* 24px */
-}
-
-.yPaddings {
-  @media (min-width: $sm) {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-  }
-
-  @media (min-width: $xl) {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
-
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-}
-
-.topPaddings {
-  @media (min-width : $sm) {
-    padding-top: 4rem;
-  }
-
-  @media (min-width: $xl) {
-    padding-top: 2rem;
-  }
-
-  padding-top: 3rem;
-}
-
-
-.bottomPaddings {
-  @media (min-width : $sm) {
-    padding-bottom: 4rem;
-  }
-
-  @media (min-width: $xl) {
-    padding-bottom: 2rem;
-  }
-
-  padding-bottom: 3rem;
-}
-
 
 .flexCenter {
   display: flex;
@@ -94,35 +61,148 @@
 
 .flexStart {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
 }
 
 .flexEnd {
   display: flex;
-  justify-items: end;
+  justify-content: flex-end;
+  align-items: center;
 }
 
+/* ===== GLOBAL TEXT ===== */
 .primaryText {
-  @media (max-width: $sm) {
-    font-size: 2.5rem;
-  }
-  font-size: 3rem;
-  font-weight: bold;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: $text;
 }
 
 .secondaryText {
-  @media (max-width: $sm) {
-    font-size: 1.1rem;
-    line-height: 40px;
-  }
-  line-height: 50px;
-  font-size: 1.3rem;
-  font-weight: 500
+  font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+  font-weight: 400;
+  color: $text-muted;
+  line-height: 1.7;
 }
+
+/* ===== ANCHOR OFFSET ===== */
 .anchor {
   display: block;
   position: relative;
   top: -100px;
   visibility: hidden;
+}
+
+/* ===== SECTION LABEL ===== */
+.sectionLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: $text-muted;
+  margin-bottom: 1.5rem;
+
+  &::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: $text;
+  }
+}
+
+/* ===== PILL BADGE ===== */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 100px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: 1.5px solid currentColor;
+}
+
+/* ===== BUTTONS ===== */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.8rem;
+  background: $text;
+  color: $white;
+  border: 2px solid $text;
+  border-radius: 4px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.22s, color 0.22s, transform 0.15s;
+
+  &:hover {
+    background: transparent;
+    color: $text;
+    transform: translateY(-2px);
+  }
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.8rem;
+  background: transparent;
+  color: $text;
+  border: 2px solid $text;
+  border-radius: 4px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.22s, color 0.22s, transform 0.15s;
+
+  &:hover {
+    background: $text;
+    color: $white;
+    transform: translateY(-2px);
+  }
+}
+
+/* ===== CARD ===== */
+.card {
+  background: $white;
+  border: 1.5px solid $border;
+  border-radius: 12px;
+  padding: 2rem;
+  transition: border-color 0.22s, box-shadow 0.22s, transform 0.22s;
+
+  &:hover {
+    border-color: $text;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    transform: translateY(-4px);
+  }
+}
+
+/* ===== MARQUEE (reused by Marquee component) ===== */
+.marquee-wrapper {
+  overflow: hidden;
+  white-space: nowrap;
+}
+.marquee-track {
+  display: inline-flex;
+  gap: 0;
+  animation: marquee 20s linear infinite;
+}
+.marquee-track:hover { animation-play-state: paused; }
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }

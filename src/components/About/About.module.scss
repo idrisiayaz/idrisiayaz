@@ -1,0 +1,162 @@
+@import '../../styles/contants.scss';
+
+.wrapper {
+  background: $white;
+  padding: 7rem 0;
+  border-top: 1.5px solid $border;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: $text;
+}
+
+.titleOutline {
+  -webkit-text-stroke: 2px $text;
+  color: transparent;
+  font-style: italic;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+
+  @media (max-width: $md) {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+/* Left */
+.leftCol {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.bio {
+  max-width: 460px;
+  line-height: 1.8;
+}
+
+.eduLabel {
+  margin-bottom: -1.2rem;
+}
+
+.educationList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.eduCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.2rem;
+  border: 1.5px solid $border;
+  border-radius: 10px;
+  background: $bg;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+
+  &:hover {
+    border-color: $text;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    transform: translateX(4px);
+  }
+}
+
+.eduIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.eduInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.eduName {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: $text;
+}
+
+.eduCourse {
+  font-size: 0.8rem;
+  color: $text-muted;
+}
+
+.eduMeta {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.eduMeta span {
+  font-size: 0.75rem;
+  color: $text-muted;
+  font-weight: 500;
+}
+
+.grade {
+  background: $text;
+  color: $white !important;
+  padding: 0.15rem 0.6rem;
+  border-radius: 100px;
+  font-size: 0.7rem !important;
+  font-weight: 700 !important;
+}
+
+/* Right */
+.rightCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.skillGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.skillPill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 1rem;
+  border-radius: 100px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--pill-color);
+  background: var(--pill-bg);
+  border: 1.5px solid var(--pill-color);
+  cursor: default;
+  user-select: none;
+  transition: transform 0.15s;
+}
