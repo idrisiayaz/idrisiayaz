@@ -642,3 +642,347 @@
     letter-spacing: -0.07em;
   }
 }
+
+/* ========================================
+   MOBILE HERO — KEEP ALL ELEMENTS VISIBLE
+======================================== */
+
+@media (max-width: 760px) {
+  .hero {
+    min-height: 900px;
+    min-height: max(900px, 100svh);
+    height: auto;
+    overflow: hidden;
+    background: #e8e8e8;
+  }
+
+  /* Background name */
+  .giantName {
+    top: 15%;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .giantNameInner {
+    font-size: clamp(3.2rem, 12vw, 5.8rem);
+    letter-spacing: -0.075em;
+
+    span {
+      color: #b8b8b8;
+      -webkit-text-fill-color: #b8b8b8;
+      -webkit-text-stroke: 0;
+    }
+  }
+
+  /* Portrait — main focal point behind all small elements */
+  .photoWrapper {
+    z-index: 2;
+    left: 50%;
+    bottom: 0;
+    width: min(115vw, 620px);
+    height: 76%;
+  }
+
+  .photo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center bottom;
+  }
+
+  /* Compact stat cards above / beside the portrait */
+  .statCard {
+    z-index: 4;
+    top: 32%;
+    width: 128px;
+    min-width: 0;
+    min-height: 66px;
+    gap: 0.55rem;
+    padding: 0.6rem;
+    border-radius: 8px;
+  }
+
+  .experienceCard {
+    left: 2.5%;
+    right: auto;
+  }
+
+  .projectsCard {
+    right: 2.5%;
+    left: auto;
+  }
+
+  .cardSymbol {
+    min-width: 22px;
+    font-size: 1.25rem;
+  }
+
+  .cardDivider {
+    height: 38px;
+  }
+
+  .cardText {
+    gap: 0.2rem;
+
+    strong {
+      font-size: 1.2rem;
+    }
+
+    span {
+      font-size: 0.43rem;
+      letter-spacing: 0.07em;
+    }
+  }
+
+  /* Intro — retain it on the left, above the portrait */
+  .sideNote {
+    display: block;
+    z-index: 4;
+    left: 5%;
+    bottom: auto;
+    top: 23%;
+    max-width: 45%;
+
+    .noteLabel {
+      font-size: 0.55rem;
+      letter-spacing: 0.07em;
+      line-height: 1.6;
+    }
+
+    .noteLine {
+      margin-top: 0.4rem;
+    }
+
+    p {
+      margin-top: 0.4rem;
+      font-size: 0.7rem;
+      line-height: 1.5;
+    }
+  }
+
+  /* Skills — compact panel on the right above the portrait */
+  .skillsCard {
+    display: flex;
+    z-index: 4;
+    right: 4%;
+    left: auto;
+    bottom: auto;
+    top: 43%;
+    gap: 0.55rem;
+    max-width: 155px;
+    padding: 0.75rem;
+    border-radius: 8px;
+
+    span {
+      gap: 0.4rem;
+      font-size: 0.62rem;
+      white-space: normal;
+    }
+
+    i {
+      flex-shrink: 0;
+      font-size: 0.7rem;
+    }
+  }
+
+  /* CTA — stays near the bottom, layered over the portrait */
+  .headlineBlock {
+    z-index: 5;
+    left: 50%;
+    bottom: 5rem;
+    width: calc(100% - 2rem);
+    max-width: 430px;
+    text-align: center;
+  }
+
+  .ctas {
+    justify-content: center;
+    gap: 0.55rem;
+    margin-top: 0;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    min-height: 42px;
+    padding: 0.65rem 0.8rem;
+    gap: 0.4rem;
+    font-size: 0.68rem;
+    border-radius: 10px;
+    white-space: nowrap;
+  }
+
+  /* Scroll indicator — retain it */
+  .scrollIndicator {
+    display: flex;
+    z-index: 6;
+    right: 2%;
+    bottom: 5rem;
+    gap: 0.4rem;
+
+    span {
+      font-size: 0.48rem;
+    }
+
+    svg {
+      width: 12px;
+      height: 12px;
+    }
+  }
+
+  /* Marquee remains at the bottom */
+  .marqueeWrapper {
+    position: relative;
+    z-index: 7;
+    margin-top: auto;
+    padding: 0.75rem 0;
+  }
+
+  .marqueeItem {
+    gap: 0.8rem;
+    padding: 0 0.8rem;
+    font-size: 0.58rem;
+  }
+}
+
+/* ========================================
+   SMALL PHONES
+======================================== */
+
+@media (max-width: 480px) {
+  .hero {
+    min-height: 820px;
+    min-height: max(820px, 100svh);
+  }
+
+  .giantName {
+    top: 15%;
+  }
+
+  .giantNameInner {
+    font-size: 11.5vw;
+  }
+
+  .photoWrapper {
+    width: 120vw;
+    height: 72%;
+  }
+
+  .statCard {
+    top: 33%;
+    width: 112px;
+    min-height: 58px;
+    padding: 0.45rem;
+    gap: 0.35rem;
+  }
+
+  .experienceCard {
+    left: 2%;
+  }
+
+  .projectsCard {
+    right: 2%;
+  }
+
+  .cardSymbol {
+    min-width: 18px;
+    font-size: 1rem;
+  }
+
+  .cardDivider {
+    height: 32px;
+  }
+
+  .cardText strong {
+    font-size: 1.05rem;
+  }
+
+  .cardText span {
+    font-size: 0.38rem;
+    letter-spacing: 0.04em;
+  }
+
+  .sideNote {
+    top: 23%;
+    left: 4%;
+    max-width: 48%;
+
+    .noteLabel {
+      font-size: 0.48rem;
+    }
+
+    p {
+      font-size: 0.64rem;
+    }
+  }
+
+  .skillsCard {
+    top: 43%;
+    right: 2%;
+    max-width: 125px;
+    padding: 0.6rem;
+    gap: 0.5rem;
+
+    span {
+      font-size: 0.55rem;
+    }
+  }
+
+  .headlineBlock {
+    bottom: 4.7rem;
+    width: calc(100% - 1.25rem);
+  }
+
+  .ctas {
+    gap: 0.4rem;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    flex: 1;
+    padding: 0.65rem 0.4rem;
+    font-size: 0.62rem;
+  }
+
+  .scrollIndicator {
+    right: 1.5%;
+    bottom: 2rem;
+  }
+}
+
+/* ========================================
+   EXTRA SMALL PHONES
+======================================== */
+
+@media (max-width: 360px) {
+  .hero {
+    min-height: 800px;
+    min-height: max(800px, 100svh);
+  }
+
+  .giantNameInner {
+    font-size: 11vw;
+  }
+
+  .statCard {
+    width: 103px;
+  }
+
+  .sideNote {
+    max-width: 45%;
+  }
+
+  .skillsCard {
+    max-width: 115px;
+  }
+
+  .headlineBlock {
+    width: calc(100% - 1rem);
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    font-size: 0.57rem;
+    gap: 0.25rem;
+  }
+}
